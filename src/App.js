@@ -1,23 +1,13 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import Home from './components/Home';
+import React, { useContext } from 'react'
+import Header from './components/Header'
+import { KeycloackContext } from './KeycloackContext'
 
-import Resources from './components/Resources';
 
-export default function App() {
-  return (
-  <div>
-    <BrowserRouter>
-      <NavBar/>
+const App = () => {
+    const { keycloackValue, authenticated } = useContext(KeycloackContext)
 
-      <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/resource' element={<Resources/>}/>
-      </Routes>
-
-      <Footer/>
-    </BrowserRouter>
-  </div>
-  )
+    return (
+        (keycloackValue && authenticated) &&  <Header/>)
 }
+
+export default App
